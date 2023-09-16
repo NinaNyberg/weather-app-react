@@ -37,6 +37,10 @@ function App() {
         }
         setLocation('');
       } else {
+        console.log('hey');
+        setMyLocation({});
+        setData({});
+        setLocation('');
         setError('You forgot to type the location :)');
       }
   };
@@ -45,7 +49,7 @@ function App() {
     if (window.navigator.geolocation)
       navigator.geolocation.getCurrentPosition(success, error);
 
-    function success(position) {
+    function success(position, e) {
       let latitude = position.coords.latitude;
       let longitude = position.coords.longitude;
 
