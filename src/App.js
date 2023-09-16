@@ -14,28 +14,31 @@ function App() {
 
   const searchLocation = async (e) => {
     setError(null); // Reset any previous errors
-    if (e.key === 'Enter' && e.target.value.length) {
-      try {
-        const response = await axios.get(url_daily);
-        if (response.status === 200) {
-          setData(response.data);
-        } else {
-          setData({});
-          setLocation('');
-          setMyLocation({});
-          setError('No location found :(');
-        }
-      } catch (err) {
-        console.clear();
+    if (e.key === 'Enter')
+      if (e.target.value.trim().length) {
+        try {
+          const response = await axios.get(url_daily);
+          if (response.status === 200) {
+            setData(response.data);
+          } else {
+            setData({});
+            setLocation('');
+            setMyLocation({});
+            setError('No location found :(');
+          }
+        } catch (err) {
+          console.clear();
 
+          setLocation('');
+          setData({});
+          setMyLocation({});
+          setError('No location found :( Try again!');
+          console.log(error);
+        }
         setLocation('');
-        setData({});
-        setMyLocation({});
-        setError('No location found :( Try again!');
-        console.log(error);
+      } else {
+        setError('You forgot to type the location :)');
       }
-      setLocation('');
-    }
   };
 
   function getWeather() {
@@ -93,6 +96,7 @@ function App() {
         <input
           type="text"
           value={location}
+          name="city"
           onChange={(e) => setLocation(e.target.value)}
           onKeyUp={searchLocation}
           placeholder="Enter location..."
@@ -168,7 +172,7 @@ function App() {
 
               {myLocation.list !== undefined && (
                 <div className="tomorrow">
-                  <p>In 24 hours</p>
+                  <p>Tomorrow</p>
                   <p className="bold">
                     {myLocation.list[7].main.temp.toFixed()}°C
                   </p>
@@ -176,7 +180,7 @@ function App() {
               )}
             </div>
           )) ||
-          error}
+          (error && <p className="error-message">{error}</p>)}
 
         {(data.list !== undefined && (
           <div className="bottom">
