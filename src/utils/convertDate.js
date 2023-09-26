@@ -1,5 +1,6 @@
 export function createDate(dt, type) {
   let day = new Date(dt * 1000);
+  console.log(day);
   if (type === 'long') {
     let options = {
       weekday: 'long',

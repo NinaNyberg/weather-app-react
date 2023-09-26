@@ -5,41 +5,50 @@ import { createDate } from './utils/convertDate';
 
 function App() {
   const [data, setData] = useState({});
+  const [current, setCurrent] = useState({});
   //const [location, setLocation] = useState('');
   const [error, setError] = useState(null);
   const [myLocation, setMyLocation] = useState({});
+  const [myLocationCurrent, setMyLocationCurrent] = useState({});
 
   const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
   const url = `https://api.openweathermap.org/data/2.5/forecast`;
+  const url_current = `https://api.openweathermap.org/data/2.5/weather`;
 
   const handleOnSearchChange = (searchData) => {
     console.log(searchData);
 
     // Search by lat,lon
-    const [lat, lon] = searchData.value.split(' ');
-    let api1 =
-      url +
-      '?lat=' +
-      lat +
-      '&lon=' +
-      lon +
-      '&appid=' +
-      apiKey +
-      '&units=metric';
+    // const [lat, lon] = searchData.value.split(' ');
+    // let api1 =
+    //   url +
+    //   '?lat=' +
+    //   lat +
+    //   '&lon=' +
+    //   lon +
+    //   '&appid=' +
+    //   apiKey +
+    //   '&units=metric';
 
-    // const loc = searchData.label.split(', ')[0];
-    // let api = url + '?q=' + loc + '&appid=' + apiKey + '&units=metric';
+    const loc = searchData.label.split(', ')[0];
+    let api = url + '?q=' + loc + '&appid=' + apiKey + '&units=metric';
+    let api2 = url_current + '?q=' + loc + '&appid=' + apiKey + '&units=metric';
 
-    fetch(api1)
+    fetch(api2)
+      .then(async (response) => {
+        const data = await response.json();
+        setCurrent(data);
+      })
+      .catch((error) => console.log(error));
+
+    fetch(api)
       .then(async (response) => {
         const data = await response.json();
         setData(data);
       })
       .catch((error) => console.log(error));
   };
-
-  console.log(data);
 
   // FOR SIMPLE SEARCH WITHOUT AUTOCOMPLETE
   // const searchLocation = async (e) => {
@@ -101,11 +110,28 @@ function App() {
         apiKey +
         '&units=metric';
 
+      let api2 =
+        url_current +
+        '?lat=' +
+        latitude +
+        '&lon=' +
+        longitude +
+        '&appid=' +
+        apiKey +
+        '&units=metric';
+
       fetch(api)
         .then((response) => response.json())
         .then((weather) => {
           setMyLocation(weather);
         });
+
+      fetch(api2)
+        .then(async (response) => {
+          const data = await response.json();
+          setMyLocationCurrent(data);
+        })
+        .catch((error) => console.log(error));
     }
 
     function error() {
@@ -168,7 +194,7 @@ function App() {
         {(data.city && (
           <div className="top">
             <div className="location">
-              <p>{data.list && createDate(data.list[0].dt, 'long')}</p>
+              <p>{current && createDate(current.dt, 'long')}</p>
               <p className="location-name">
                 {data?.city?.name}, {data?.city?.country}
               </p>
@@ -270,7 +296,9 @@ function App() {
             <div className="top">
               <div className="location">
                 <p>
-                  {myLocation.list && createDate(myLocation.list[0].dt, 'long')}
+                  {myLocationCurrent &&
+                    createDate(myLocationCurrent.dt, 'long')}
+                  :
                 </p>
                 <p className="location-name">
                   {myLocation.city.name}, {myLocation.city.country}
