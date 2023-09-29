@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/weather-app-react/static/css/main.6e6da1aa.css",
-    "main.js": "/weather-app-react/static/js/main.e6a53542.js",
+    "main.css": "/weather-app-react/static/css/main.0b01e2ab.css",
+    "main.js": "/weather-app-react/static/js/main.db1b31b6.js",
     "static/media/snowflake-svgrepo-com.svg": "/weather-app-react/static/media/snowflake-svgrepo-com.8dac03e876c89465dd878dd1f09051db.svg",
     "static/media/summer-svgrepo-com.svg": "/weather-app-react/static/media/summer-svgrepo-com.38e5b00521727ba1bbba70d4faa49867.svg",
     "static/media/flower-forest-growth-leaf-plant-spring-svgrepo-com.svg": "/weather-app-react/static/media/flower-forest-growth-leaf-plant-spring-svgrepo-com.4c88bdceef7ac67f26b5bd0c2b3232d7.svg",
     "static/media/autumn-leaf-svgrepo-com.svg": "/weather-app-react/static/media/autumn-leaf-svgrepo-com.b57fb48021286004f90219155a457c29.svg",
     "index.html": "/weather-app-react/index.html",
-    "main.6e6da1aa.css.map": "/weather-app-react/static/css/main.6e6da1aa.css.map",
-    "main.e6a53542.js.map": "/weather-app-react/static/js/main.e6a53542.js.map"
+    "main.0b01e2ab.css.map": "/weather-app-react/static/css/main.0b01e2ab.css.map",
+    "main.db1b31b6.js.map": "/weather-app-react/static/js/main.db1b31b6.js.map"
   },
   "entrypoints": [
-    "static/css/main.6e6da1aa.css",
-    "static/js/main.e6a53542.js"
+    "static/css/main.0b01e2ab.css",
+    "static/js/main.db1b31b6.js"
   ]
 }
